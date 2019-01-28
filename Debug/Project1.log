@@ -1,0 +1,5 @@
+﻿  Source.c
+c:\users\matt0\source\repos\project1\project1\source.c(1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  c:\users\matt0\source\repos\project1\project1\source.c(1): note: command-line arguments:  see previous definition of '_CRT_SECURE_NO_WARNINGS'
+c:\users\matt0\source\repos\project1\project1\source.c(77): warning C4101: 'sum': unreferenced local variable
+  Project1.vcxproj -> C:\Users\matt0\source\repos\Project1\Debug\Project1.exe
