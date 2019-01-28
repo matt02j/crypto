@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "functions.h"
-
+//convert frequencies to decimal instead of percentage to save computation time
 float englishFrequencies[26] = { 8.167,1.492,2.782,4.253,12.702,2.228,2.015,6.094,6.966,0.153,0.772,4.025,2.406,6.749,7.507,1.929,0.095,5.987,6.327,9.056,2.758,0.978,2.360,0.150,1.974,0.074 };
 char mostCommonEnglishLetter[26] = { 'e','t','a','o','i','n','s','h','r','d','l','c','u','m','w','f','g','y','p','b','v','k','j','x','q','z' };
 
@@ -97,4 +97,28 @@ void substitution(char* in, char* out, char table[26]) {// index is cyphertext, 
 	for (int i = 0; i < strlen(in); i++) {
 		out[i] = table[in[i] - 'A'];
 	}
+}
+
+int IC(float* freq) {
+	int sum;
+	for (int i = 0; i < 26; i++) {
+		sum += freq[i]/100.0 * freq[i]/100.0;
+	}
+	return sum
+}
+
+int shiftedIC(float* freq) { //returns the value that produces the highest IC
+	int sum, ic, shift;
+
+	for (int i = 0; i < 26; i++) {
+		sum = 0;
+		for (int j = 0; j < 26; j++) {
+			sum += englishFrequencies[j]/100.0 * freq[(i + j) % 26];
+		}
+		if (sum > ic) {
+			ic = sum;
+			shift = i;
+		}
+	}
+	return shift;
 }
