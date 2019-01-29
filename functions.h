@@ -13,5 +13,5 @@ int shiftedIC(float* freq);
 void substitution(char* in, char* out, char table[26]);
 void makeSubTable(float *freq, char* table);
 int countOccurences(char* substring, char* text);
-
+int kasiki_test(char *text, char tris[10][4]); //performs kasiki test based off 10 most common tris and returns key length
 #endif

@@ -26,24 +26,12 @@ int main(void) {
 	frequency(cypher, strlen(cypher), freq, digrams, NULL, NULL);
 
 	//printf("%s\n", cypher);
-	for (int i = 0; i < 26; i++) {
+	for (int i = 0; i < 26; i++) { //testing letter frequency
 		printf("%c - %.2f \n", i + 'A', freq[i]);
 	}
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 10; i++) { //testing digrams
 		printf("%s \n", digrams[i]);
 	}
-	//char tbl[26];
-	//makeSubTable(freq, tbl);
-
-
-	//printf("Cipher\tplain\n");
-	//for (int i = 0; i < 26; i++) {
-	//	printf("%c\t%c\n", i + 'A', tbl[i]);
-	//}
-
-
-	//substitution(cypher, plain, tbl);
-	//printf("%s \n", plain); 
 
 
 	/* //  simple shift with e as highest frequency

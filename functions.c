@@ -16,12 +16,12 @@ void unshift(char* in, char* out, int key, int textLen) { //out = in-key
 	shift(in, out, -key, textLen);
 }
 
-bool contains(char list[10][3], char * word) {
+bool contains(char list[10][5], char * word) {
 	for (int i = 0; i < 10; i++) {
 		if (list[i] == NULL) {
 			return false;
 		}
-		if (strcmp(&list[i][0], word) == 0) {
+		if (strcmp(list[i], word) == 0) {
 			return true;
 		}
 	}
@@ -31,19 +31,21 @@ bool contains(char list[10][3], char * word) {
 void frequency(char* in, int textLen, float letterFrequency[26], char digrams[10][3], char topTrigrams[10][4], char topQuads[10][5]) {
 	char last4[4];
 	int letterCount[26] = { 0 };
-	for (int i = 0; i < textLen; i++) {
+	for (int i = 0; i < textLen; i++) { //count characters
 		letterCount[in[i] - 'A'] ++;
 	}
-	for (int i = 0; i < 26; i++) {
+	for (int i = 0; i < 26; i++) { //calculate frequency
 		letterFrequency[i] = (letterCount[i] / (float)textLen )*100;
 	}
 	int count[10] = { 0 } , x;
 	char di[3]; di[2] = 0; // null terminated the string, dont change this character
 	di[1] = in[0];
-	for (int i = 1; i < textLen/2; i++) { //super not efficient...but it should work
+
+	//most common digrams
+	for (int i = 1; i < textLen; i++) { //super not efficient...but it should work
 		di[0] = di[1];
 		di[1] = in[i];
-		if (contains(digrams, di)) {
+		if (contains(digrams, di)) { //if its already a common digram, skip it
 			continue;
 		}
 		x= countOccurences(di, in);
@@ -104,7 +106,7 @@ int IC(float* freq) {
 	for (int i = 0; i < 26; i++) {
 		sum += freq[i]/100.0 * freq[i]/100.0;
 	}
-	return sum
+	return sum;
 }
 
 int shiftedIC(float* freq) { //returns the value that produces the highest IC
