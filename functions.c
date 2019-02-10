@@ -1,13 +1,14 @@
 #include <math.h>
+#include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 #include "functions.h"
 
-#define MAX_KEYLEN 15 
-
 //convert frequencies to decimal instead of percentage to save computation time
 float englishFrequencies[26] = { 8.167,1.492,2.782,4.253,12.702,2.228,2.015,6.094,6.966,0.153,0.772,4.025,2.406,6.749,7.507,1.929,0.095,5.987,6.327,9.056,2.758,0.978,2.360,0.150,1.974,0.074 };
 char mostCommonEnglishLetter[26] = { 'e','t','a','o','i','n','s','h','r','d','l','c','u','m','w','f','g','y','p','b','v','k','j','x','q','z' };
+char commonTris[20][4] = {"the","and","tha","ent","ing","ion","tio","for","nde", "has", "nce", "edt", "tis", "oft", "sth", "men","her","hat","his","ere"};
+
 
 void shift(char* in, char* out, int key, int textLen) { //out = in+key
 	for (int i = 0; i < textLen; i++) {
@@ -71,11 +72,14 @@ void frequency(char* in, int textLen, float letterFrequency[26], char digrams[10
 }
 
 void countTris(char* text, char tris[20][4]) {
+
+	printf("counting Tri-Grams\n");
+
 	int x;
 	int count[20] = { 0 };
 	char tri[4];
 	tri[1] = text[0]; tri[2] = text[1]; tri[3] = 0;
-	for (int i = 2; i < strlen(text) / 2; i++) {
+	for (int i = 2; i < strlen(text) ; i++) {
 		tri[0] = tri[1]; tri[1] = tri[2]; tri[2] = text[i];
 		if (contains(tris, tri, 20)) {
 			continue;
@@ -109,6 +113,9 @@ void kasiki_test(char *text, char tris[20][4], int* key1, int *key2) { //perform
 	int factors[MAX_KEYLEN+1] = { 0 };
 	char * ptr=text;
 	*key1 = 0; *key2 = 0;
+
+	printf("running kasiki analysis\n");
+
 	for (int i = 0; i <20; i++) {
 		ptr = text;
 		for (int j = 0; j < 20 && ptr <text+strlen(text); j++) {
@@ -126,14 +133,14 @@ void kasiki_test(char *text, char tris[20][4], int* key1, int *key2) { //perform
 				break;
 			}
 			for (int k = 2; k < MAX_KEYLEN+1; k++) {  // count occurences of each factor from 2 to MAX_KEYLEN
-				if (idx[i][j + 1] - idx[i][j] % k == 0) {
+				if ((idx[i][j + 1] - idx[i][j]) % k == 0) {
 					factors[k]++;
 				}
 			}
 		}
 	}
-	for (int i = 2; i < MAX_KEYLEN + 1; i++){
-		if (factors[i] > *key1) {
+	for (int i = 4; i < MAX_KEYLEN + 1; i++){
+		if (factors[i] >= factors[*key1]) {
 			*key2 = *key1;
 			*key1 = i;
 		}
@@ -142,9 +149,10 @@ void kasiki_test(char *text, char tris[20][4], int* key1, int *key2) { //perform
 
 }
 void vigenere(char * in, char * out, char * key, int keylen){ // if key is null try to find it with frequency analysis
-	int keys[MAX_KEYLEN]; // up to 15 letter keys
-	float freq[MAX_KEYLEN][26];
+	int keys[MAX_KEYLEN]={0}; // up to 15 letter keys
+	float freq[MAX_KEYLEN][26]={{0}};
 	int textLen = strlen(in);
+	printf("attempting Vigenere is key length %d\n",keylen);
 	if (key == NULL) {
 		for (int j = 0; j < keylen; j++) {
 			int letterCount[26] = { 0 };
@@ -152,17 +160,30 @@ void vigenere(char * in, char * out, char * key, int keylen){ // if key is null 
 				letterCount[in[i] - 'A'] ++;
 			}
 			for (int i = 0; i < 26; i++) { //calculate frequency
-				freq[j][i] = (letterCount[i] / (float)textLen) * 100;
+				freq[j][i] = (letterCount[i] / ((float)textLen/keylen)) * 100;
 			}
+		//for (int i = 0; i < 26; i++) { //testing letter frequency
+		//	printf("%c - %.2f \n", i + 'A', freq[j][i]);
+		//}
 			keys[j] = shiftedIC(freq[j]);
 		}
 	}
-	for (int i = 0; i < keylen; i++) {
-		printf("key %d is %d\n", i, keys[i]);
+	else{
+		keylen = strlen(key);
+		for(int i=0;i<keylen;i++){
+			keys[i] = key[i]-'A';
+		}
 	}
+	printf("key is ");
+	for (int i = 0; i < keylen; i++) {
+		//printf("key %d is %d\n", i, keys[i]);
+		printf("%c",keys[i]+'A');
+	}
+	printf("\n");
 	for (int i = 0; i < textLen; i++) {
 		out[i] = (in[i] - 'A' + keys[i%keylen]) % 26 + 'A';
 	}
+
 }
 int GCD(int a, int b) {
 	int c = 1, x, y, gcd;
@@ -238,8 +259,20 @@ int shiftedIC(float* freq) { //returns the value that produces the highest IC
 
 void permute(char *text, char * out, int width) {
 	int len = strlen(text);
+	unsigned int idx=0;
 	for (int i = 0; i < strlen(text); i++) {
-		out[i] = text[ i*(len / width) % len ];
+		out[i] = text[idx%len];
+		idx+=len/width;
+		if(i%width < len%width || i%width==width-1){
+			idx++;
+		}
 	}
 
+}
+
+void printpart(char* text, int len){ 
+	for(int i=0;i<len;i++){
+		printf("%c",text[i]);
+	}
+	printf("\n");
 }

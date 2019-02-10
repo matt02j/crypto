@@ -2,7 +2,9 @@
 
 #define FUNC_H
 
-
+#ifndef MAX_KEYLEN
+#define MAX_KEYLEN 30 
+#endif
 //ALL FUNCTIONS EXPECT TEXT TO BE ALL UPPERCASE!!
 
 void shift(char* in, char* out, int key, int textLen); //out = in+key
@@ -16,4 +18,9 @@ int countOccurences(char* substring, char* text);
 void countTris(char* text, char tris[20][4]);
 void kasiki_test(char *text, char tris[20][4],int* key1, int* key2); //performs kasiki test based off 10 most common tris
 void vigenere(char* in, char* out, char* key, int keylen);
+void permute(char *text, char * out, int width);
+void printpart(char* text, int len);
+
+
+
 #endif
