@@ -21,17 +21,31 @@ int main(void) {
 	char cypher[30000];
 	char plain[30000] = { 0 };
 	float freq[26];
-	char digrams[10][3] = { {0 } };
+	char digrams[10][3] = { {0} };
 	fscanf(infile, "%s", cypher);
-	frequency(cypher, strlen(cypher), freq, digrams, NULL, NULL);
+	frequency(cypher, strlen(cypher), freq, digrams, NULL);
 
+	
 	//printf("%s\n", cypher);
 	for (int i = 0; i < 26; i++) { //testing letter frequency
 		printf("%c - %.2f \n", i + 'A', freq[i]);
 	}
-	for (int i = 0; i < 10; i++) { //testing digrams
-		printf("%s \n", digrams[i]);
+	char tris[20][4] = { {0} };
+	countTris(cypher, tris);
+	for (int i = 0; i < 10; i++) { //testing trigrams
+		printf("%s \n", tris[i]);
 	}
+
+
+	int key1=0, key2=0;
+	kasiki_test(cypher, tris, &key1, &key2);
+	printf("key1 %d \t key2 %d\n", key1, key2);
+	vigenere(cypher, plain, NULL, key1);
+	printf("%s", plain);
+
+	//for (int i = 0; i < 10; i++) { //testing digrams
+	//	printf("%s \n", digrams[i]);
+	//}
 
 
 	/* //  simple shift with e as highest frequency
@@ -73,26 +87,5 @@ int main(void) {
 			printf("multiplicative inverse of %d mod %d is %d\n", a, n, t);
 		
 	}
-	*/
-
-
-	/*  //GCD
-
-
-	
-	int a, b,c=1,x,y, gcd;
-	printf("enter 2 numbers to find gcd: ");
-
-	scanf("%d %d", &a, &b);
-	x = a;
-	y = b;
-	while (c != 0) {
-		c = a % b;
-		a = b;
-		b = c;
-	}
-	gcd = a;
-
-	printf("gcd of %d and %d is %d\n", x, y, gcd);
 	*/
 }
