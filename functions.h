@@ -13,14 +13,16 @@ void frequency(char* in, int textLen, float letterFrequency[26], char digrams[10
 float IC(float *freq);
 int shiftedIC(float* freq);
 void substitution(char* in, char* out, char table[26]);
-void makeSubTable(float *freq, char* table);
+void makeSubTable(float *freq, char tris[20][4], char* table);
 int countOccurences(char* substring, char* text);
 void countTris(char* text, char tris[20][4]);
 void kasiki_test(char *text, char tris[20][4],int* key1, int* key2); //performs kasiki test based off 10 most common tris
 void vigenere(char* in, char* out, char* key, int keylen);
 void permute(char *text, char * out, int width);
 void printpart(char* text, int len);
+void printpartSub(char* text, int len,char tbl[26]);
 int multiplicativeInverse(int num, int mod);
 void printSubTbl(char *tbl);
-void printgrams( char* grams[], int num);
+void printgrams( char grams[][4], int num);
+void printEnglishTris();
 #endif

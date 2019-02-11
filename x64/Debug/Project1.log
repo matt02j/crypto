@@ -1,17 +1,16 @@
-﻿  functions.c
-c:\users\matt0\source\repos\project1\project1\functions.c(9): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\matt0\source\repos\project1\project1\functions.c(43): warning C4101: 'x': unreferenced local variable
-c:\users\matt0\source\repos\project1\project1\functions.c(119): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
-c:\users\matt0\source\repos\project1\project1\functions.c(140): warning C4013: 'printf' undefined; assuming extern returning int
-c:\users\matt0\source\repos\project1\project1\functions.c(147): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-c:\users\matt0\source\repos\project1\project1\functions.c(217): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-c:\users\matt0\source\repos\project1\project1\functions.c(229): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  Source.c
-c:\users\matt0\source\repos\project1\project1\source.c(26): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-c:\users\matt0\source\repos\project1\project1\source.c(13): warning C4101: 'type': unreferenced local variable
-c:\users\matt0\source\repos\project1\project1\source.c(14): warning C4101: 'textLen': unreferenced local variable
-c:\users\matt0\source\repos\project1\project1\source.c(12): warning C4101: 'plainText': unreferenced local variable
-c:\users\matt0\source\repos\project1\project1\source.c(12): warning C4101: 'cypherText': unreferenced local variable
-  Generating Code...
-c:\users\matt0\source\repos\project1\project1\functions.c(177): warning C4716: 'GCD': must return a value
+﻿  Source.c
+c:\users\matt0\source\repos\project1\project1\source.c(36): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
+c:\users\matt0\source\repos\project1\project1\source.c(69): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
+c:\users\matt0\source\repos\project1\project1\source.c(114): warning C4047: 'function': 'char *' differs in levels of indirection from 'char (*)[30]'
+c:\users\matt0\source\repos\project1\project1\source.c(114): warning C4024: 'vigenere': different types for formal and actual parameter 3
+c:\users\matt0\source\repos\project1\project1\source.c(160): warning C4133: 'function': incompatible types - from 'char [6]' to 'FILE *const '
+c:\users\matt0\source\repos\project1\project1\source.c(160): warning C4047: 'function': 'const char *const ' differs in levels of indirection from 'int'
+c:\users\matt0\source\repos\project1\project1\source.c(160): warning C4024: 'fprintf': different types for formal and actual parameter 2
+c:\users\matt0\source\repos\project1\project1\source.c(71): warning C4473: 'printf' : not enough arguments passed for format string
+  c:\users\matt0\source\repos\project1\project1\source.c(71): note: placeholders and their parameters expect 1 variadic arguments, but 0 were provided
+  c:\users\matt0\source\repos\project1\project1\source.c(71): note: the missing variadic argument 1 is required by format string '%d'
+c:\users\matt0\source\repos\project1\project1\source.c(14): warning C4101: 'type': unreferenced local variable
+c:\users\matt0\source\repos\project1\project1\source.c(13): warning C4101: 'cipherText': unreferenced local variable
+c:\users\matt0\source\repos\project1\project1\source.c(15): warning C4101: 'textLen': unreferenced local variable
+c:\users\matt0\source\repos\project1\project1\source.c(13): warning C4101: 'plainText': unreferenced local variable
   Project1.vcxproj -> C:\Users\matt0\source\repos\Project1\x64\Debug\Project1.exe

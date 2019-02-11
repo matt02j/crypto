@@ -153,7 +153,7 @@ void vigenere(char * in, char * out, char * key, int keylen){ // if key is null 
 	float freq[MAX_KEYLEN][26]={{0}};
 	int textLen = strlen(in);
 	printf("attempting Vigenere with key length %d\n",keylen);
-	if (key == NULL) {
+	if (key == NULL || key[0] == 0) {
 		for (int j = 0; j < keylen; j++) {
 			int letterCount[26] = { 0 };
 			for (int i = j; i < textLen; i += keylen) { //count characters
@@ -178,6 +178,9 @@ void vigenere(char * in, char * out, char * key, int keylen){ // if key is null 
 	for (int i = 0; i < keylen; i++) {
 		//printf("key %d is %d\n", i, keys[i]);
 		printf("%c",keys[i]+'A');
+		if (key != NULL) {
+			key[i] = keys[i] + 'A';
+		}
 	}
 	printf("\n");
 	for (int i = 0; i < textLen; i++) {
@@ -210,10 +213,10 @@ int countOccurences(char* substring, char* text) {
 	return count;
 }
 
-void makeSubTable(float *freq, char* table) {
+void makeSubTable(float *freq, char tris[20][4],char* table) {// index is cyphertext, content is the coresponding plaintext character
 	int idx;
 	float max, lastmax=100;
-	for (int i = 0; i < 26; i++) {
+	for (int i = 0; i < 3; i++) {
 		max = -1;
 		for (int j = 0; j < 26; j++) {
 			if (freq[j] > max && freq[j] < lastmax) {
@@ -222,13 +225,29 @@ void makeSubTable(float *freq, char* table) {
 			}
 		}
 		lastmax = max;
-		table[idx] = mostCommonEnglishLetter[i];
+		table[idx] = mostCommonEnglishLetter[i]-'a'+'A';
 	}
 }
-
+void printpartSub(char* cipher, int len, char tbl[26]) {
+	for (int j = 0; j < ceil(len / 100.0); j++) {
+		for (int i = 0; i < 100 && i+100*j < len; i++) {
+			printf("%c", tbl[cipher[i+j*100]-'A']);
+		}
+		printf("\n");
+		for (int i = 0; i < 100 && i + 100 * j < len; i++) {
+			printf("%c", cipher[i+j*100] );
+		}
+		printf("\n\n");
+	}
+}
 void substitution(char* in, char* out, char table[26]) {// index is cyphertext, content is the coresponding plaintext character
 	for (int i = 0; i < strlen(in); i++) {
-		out[i] = table[in[i] - 'A'];
+		if (table[in[i] - 'A'] == 0) {
+			out[i] = '_';
+		}
+		else {
+			out[i] = table[in[i] - 'A'];
+		}
 	}
 }
 
@@ -240,16 +259,17 @@ float IC(float* freq) {
 	return sum;
 }
 void printSubTbl(char* tbl){
+	printf("Cipher: ");
 	for(int i=0; i<26;i++){
 		printf(" %c |",i+'A');
 	}
-	printf("\n");
+	printf("\nPlain:  ");
 	for(int i=0; i<26;i++){
 		if(tbl[i]==0){
 			printf(" _ |");
 		}
 		else{
-			printf(" %c |",tbl[i]-'a'+'A');
+			printf(" %c |",tbl[i]);
 		}
 	}
 	printf("\n");
@@ -307,7 +327,7 @@ int multiplicativeInverse(int num, int mod){
 			
 		}
 }
-void printgrams( char* grams[], int num){
+void printgrams( char grams[][4], int num){
 	for(int i=0;i<num;i++){
 		printf("%s ",grams[i]);
 	}
@@ -318,4 +338,7 @@ void printpart(char* text, int len){
 		printf("%c",text[i]);
 	}
 	printf("\n");
+}
+void printEnglishTris() {
+	printgrams(commonTris, 20);
 }
