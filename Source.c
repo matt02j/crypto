@@ -61,6 +61,7 @@ int main(int argc, char* argv[]) {
 		int key;
 		char tris[20][4] = { {0} };
 		int key1=0, key2=0;
+		char tbl[26]={0};
 		switch(choice){
 		case 1: //simple shift
 			key = shiftedIC(freq);
@@ -72,7 +73,12 @@ int main(int argc, char* argv[]) {
 
 			break;
 		case 3: // Substitution
-
+			countTris(cipher, tris);
+			makeSubTable(freq,tbl);
+			printgrams((char **)tris,20);
+			printSubTbl(tbl);
+			substitution(cipher,plain,tbl);
+			printpart(plain,200);
 			break;
 		case 4: // Vigenere
 			countTris(cipher, tris);
@@ -112,36 +118,4 @@ int main(int argc, char* argv[]) {
 		
 
 	}
-	//for (int i = 0; i < 10; i++) { //testing digrams
-	//	printf("%s \n", digrams[i]);
-	//}
-
-
-
-	/* // multiplicative inverse 
-	int a, n, t=0, newt=1, r, newr,q,temp;
-	printf("enter a and n to find multiplicative inverse of a mod n: ");
-	scanf("%d %d", &a, &n);
-	r = n;     newr = a;
-	while (newr != 0) {
-		q = r / newr;
-		temp = newt;
-		newt = t - (q*newt); 
-		t = temp;
-		temp = newr;
-		newr = r - (q*newr);
-		r = temp;
-		printf("| %d\t| %d\t| %d\t|\n", q, r, t);
-	}
-	if(r > 1 ){
-		printf("a is not invertible");
-	}
-	else {
-		if (t < 0) {
-			t = t + n;
-		}
-			printf("multiplicative inverse of %d mod %d is %d\n", a, n, t);
-		
-	}
-	*/
 }

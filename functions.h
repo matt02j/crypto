@@ -20,7 +20,7 @@ void kasiki_test(char *text, char tris[20][4],int* key1, int* key2); //performs 
 void vigenere(char* in, char* out, char* key, int keylen);
 void permute(char *text, char * out, int width);
 void printpart(char* text, int len);
-
-
-
+int multiplicativeInverse(int num, int mod);
+void printSubTbl(char *tbl);
+void printgrams( char* grams[], int num);
 #endif

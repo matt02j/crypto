@@ -1,0 +1,4 @@
+Cipher 1 is a simple shift with key of 16
+Cipher 2 is substitution, possibly affine
+Cipher 3 is Vigenere, key is TUCSON
+Cipher 4 is one time pad/ unsolveable

@@ -152,7 +152,7 @@ void vigenere(char * in, char * out, char * key, int keylen){ // if key is null 
 	int keys[MAX_KEYLEN]={0}; // up to 15 letter keys
 	float freq[MAX_KEYLEN][26]={{0}};
 	int textLen = strlen(in);
-	printf("attempting Vigenere is key length %d\n",keylen);
+	printf("attempting Vigenere with key length %d\n",keylen);
 	if (key == NULL) {
 		for (int j = 0; j < keylen; j++) {
 			int letterCount[26] = { 0 };
@@ -181,7 +181,7 @@ void vigenere(char * in, char * out, char * key, int keylen){ // if key is null 
 	}
 	printf("\n");
 	for (int i = 0; i < textLen; i++) {
-		out[i] = (in[i] - 'A' + keys[i%keylen]) % 26 + 'A';
+		out[i] = (in[i] - 'A'+26 - keys[i%keylen]) % 26 + 'A';
 	}
 
 }
@@ -239,7 +239,21 @@ float IC(float* freq) {
 	}
 	return sum;
 }
-
+void printSubTbl(char* tbl){
+	for(int i=0; i<26;i++){
+		printf(" %c |",i+'A');
+	}
+	printf("\n");
+	for(int i=0; i<26;i++){
+		if(tbl[i]==0){
+			printf(" _ |");
+		}
+		else{
+			printf(" %c |",tbl[i]-'a'+'A');
+		}
+	}
+	printf("\n");
+}
 int shiftedIC(float* freq) { //returns the value that produces the highest IC
 	float sum, ic = 0;
 	int shift = 0;
@@ -269,7 +283,36 @@ void permute(char *text, char * out, int width) {
 	}
 
 }
-
+int multiplicativeInverse(int num, int mod){
+	int a=num, n=mod, t=0, newt=1, r, newr,q,temp;
+		r = n;     newr = a;
+		while (newr != 0) {
+			q = r / newr;
+			temp = newt;
+			newt = t - (q*newt); 
+			t = temp;
+			temp = newr;
+			newr = r - (q*newr);
+			r = temp;
+			printf("| %d\t| %d\t| %d\t|\n", q, r, t);
+		}
+		if(r > 1 ){
+			return -1;
+		}
+		else {
+			while (t < 0) {
+				t = t + n;
+			}
+				return t;
+			
+		}
+}
+void printgrams( char* grams[], int num){
+	for(int i=0;i<num;i++){
+		printf("%s ",grams[i]);
+	}
+	printf("\n");
+}
 void printpart(char* text, int len){ 
 	for(int i=0;i<len;i++){
 		printf("%c",text[i]);
