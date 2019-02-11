@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		int choice;
-		printf("based on the frequency, which type of chypher would you like to attempt?\n 1 -> Simple Shift\n 2 -> Affine(not yet implemented) \n 3 -> Substitution \n 4 -> Vigenere\n 5 -> permutation (columnar transposition)\nEnter a number: ");
+		printf("based on the frequency, which type of chypher would you like to attempt?\n 1 -> Simple Shift\n 2 -> Affine(use substitution) \n 3 -> Substitution \n 4 -> Vigenere\n 5 -> permutation (columnar transposition)\nEnter a number: ");
 		scanf("%d",&choice);
 		int key;
 		char tris[20][4] = { {0} };
@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
 			key = shiftedIC(freq);
 			unshift(cipher, plain, key, strlen(cipher));
 			printf("%s\n", plain);
-			printf("This was decrypted with a key of %d\n");//, Does this make sense?(y/n)",key);
+			printf("This was decrypted with a key of %d\n",key);//, Does this make sense?(y/n)",key);
 			break;
 		case 2:// Affine
 			printf("Not Implemented, Use Substitution");

@@ -6,9 +6,6 @@ c:\users\matt0\source\repos\project1\project1\source.c(114): warning C4024: 'vig
 c:\users\matt0\source\repos\project1\project1\source.c(160): warning C4133: 'function': incompatible types - from 'char [6]' to 'FILE *const '
 c:\users\matt0\source\repos\project1\project1\source.c(160): warning C4047: 'function': 'const char *const ' differs in levels of indirection from 'int'
 c:\users\matt0\source\repos\project1\project1\source.c(160): warning C4024: 'fprintf': different types for formal and actual parameter 2
-c:\users\matt0\source\repos\project1\project1\source.c(71): warning C4473: 'printf' : not enough arguments passed for format string
-  c:\users\matt0\source\repos\project1\project1\source.c(71): note: placeholders and their parameters expect 1 variadic arguments, but 0 were provided
-  c:\users\matt0\source\repos\project1\project1\source.c(71): note: the missing variadic argument 1 is required by format string '%d'
 c:\users\matt0\source\repos\project1\project1\source.c(14): warning C4101: 'type': unreferenced local variable
 c:\users\matt0\source\repos\project1\project1\source.c(13): warning C4101: 'cipherText': unreferenced local variable
 c:\users\matt0\source\repos\project1\project1\source.c(15): warning C4101: 'textLen': unreferenced local variable
